@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tv/Use%20Json/Json_Splash_Screen/json_splash_screen.dart';
 import 'Splash_Screen/splash_screen.dart';
 
 void main() async {
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(logoPath: savedLogo),
+      home: JsonSplashScreen(),
     );
   }
 }
