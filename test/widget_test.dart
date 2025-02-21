@@ -7,13 +7,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:tv/Use%20Json/Json_Splash_Screen/next_screen.dart';
 
 import 'package:tv/main.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp(savedLogo: '',));
+    await tester.pumpWidget(MyApp(savedLogo: '', startScreen: NextScreen(),));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

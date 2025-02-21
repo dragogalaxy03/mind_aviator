@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../main.dart';// Restart the app with new logo
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -24,13 +23,14 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  // Save new logo selection and restart the app
+  // Save new logo selection
   Future<void> _setUserLogo(String logo) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('user_logo', logo);
 
-    // Restart app to apply new splash screen logo
-    runApp(MyApp(savedLogo: logo));
+    setState(() {
+      currentLogo = logo; // Update UI immediately
+    });
   }
 
   @override
@@ -42,7 +42,9 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           Text("Current Logo:", style: TextStyle(fontSize: 20)),
           SizedBox(height: 10),
-          Image.asset(currentLogo, width: 100),
+          Image.asset(currentLogo, width: 100, errorBuilder: (context, error, stackTrace) {
+            return Text("Image not found");
+          }),
 
           SizedBox(height: 20),
           Text("Choose a new logo:", style: TextStyle(fontSize: 18)),
@@ -52,17 +54,23 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               GestureDetector(
                 onTap: () => _setUserLogo('images/loqal.png'),
-                child: Image.asset('images/loqal.png', width: 80),
+                child: Image.asset('images/loqal.png', width: 80, errorBuilder: (context, error, stackTrace) {
+                  return Text("Image not found");
+                }),
               ),
               SizedBox(width: 20),
               GestureDetector(
                 onTap: () => _setUserLogo('images/microsoft.png'),
-                child: Image.asset('images/microsoft.png', width: 80),
+                child: Image.asset('images/microsoft.png', width: 80, errorBuilder: (context, error, stackTrace) {
+                  return Text("Image not found");
+                }),
               ),
               SizedBox(width: 20),
               GestureDetector(
                 onTap: () => _setUserLogo('images/mindaviator.png'),
-                child: Image.asset('images/mindaviator.png', width: 80),
+                child: Image.asset('images/mindaviator.png', width: 80, errorBuilder: (context, error, stackTrace) {
+                  return Text("Image not found");
+                }),
               ),
             ],
           ),
